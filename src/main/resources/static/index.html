@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Watch Together</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- ========================= -->
+        <!-- HEADER -->
+        <!-- ========================= -->
+
+        <header>
+
+            <h1>🎬 Watch Together</h1>
+
+            <p>
+                Watch videos and chat with your friends in real time.
+            </p>
+
+        </header>
+
+
+        <!-- ========================= -->
+        <!-- ROOM SECTION -->
+        <!-- ========================= -->
+
+        <section class="room-section">
+
+            <div class="input-group">
+
+                <label for="roomId">
+                    Room ID
+                </label>
+
+                <input
+                    type="text"
+                    id="roomId"
+                    placeholder="Enter room code"
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="username">
+                    Your Name
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter your name"
+                >
+
+            </div>
+
+
+            <button
+                id="joinButton"
+                onclick="connect()"
+                class="primary-button">
+
+                Join Room
+
+            </button>
+
+
+            <div id="connectionStatus"
+                 class="status disconnected">
+
+                🔴 Disconnected
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- MAIN CONTENT -->
+        <!-- ========================= -->
+
+        <main>
+
+            <!-- ========================= -->
+            <!-- VIDEO SECTION -->
+            <!-- ========================= -->
+
+            <section class="video-section">
+
+                <h2>🎥 Video</h2>
+
+                <div class="video-container">
+
+                    <video
+                        id="video"
+                        controls
+                        preload="metadata">
+
+                        <source
+                            src="sample.mp4"
+                            type="video/mp4">
+
+                        Your browser does not support
+                        HTML5 video.
+
+                    </video>
+
+                </div>
+
+
+                <!-- VIDEO CONTROLS -->
+
+                <div class="video-controls">
+
+                    <button
+                        onclick="sendPlay()"
+                        class="control-button">
+
+                        ▶️ Play
+
+                    </button>
+
+
+                    <button
+                        onclick="sendPause()"
+                        class="control-button">
+
+                        ⏸️ Pause
+
+                    </button>
+
+                </div>
+
+
+                <p class="sync-info">
+
+                    🔄 Video automatically synchronizes
+                    with everyone in the room.
+
+                </p>
+
+            </section>
+
+
+            <!-- ========================= -->
+            <!-- CHAT SECTION -->
+            <!-- ========================= -->
+
+            <section class="chat-section">
+
+    <h2>💬 Chat</h2>
+
+    <div id="chatBox" class="chat-box">
+
+        <div class="welcome-message">
+            👋 Join the room and start chatting!
+        </div>
+
+    </div>
+
+    <div class="chat-input-area">
+
+        <input
+            type="text"
+            id="chatInput"
+            placeholder="Type a message..."
+            autocomplete="off"
+        >
+
+        <button
+            onclick="sendMessage()"
+            class="send-button">
+            Send
+        </button>
+
+    </div>
+
+</section>
+
+        </main>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- SOCKJS -->
+    <!-- ========================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js">
+    </script>
+
+
+    <!-- ========================= -->
+    <!-- STOMP -->
+    <!-- ========================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/stompjs/lib/stomp.min.js">
+    </script>
+
+
+    <!-- ========================= -->
+    <!-- OUR JAVASCRIPT -->
+    <!-- ========================= -->
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
