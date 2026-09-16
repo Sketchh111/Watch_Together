@@ -523,3 +523,9 @@ video {
     border-radius: 10px;
     word-wrap: break-word;
 }
+
+.sender-name {
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 4px;
+}

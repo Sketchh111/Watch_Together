@@ -65,23 +65,19 @@ public class ChatController {
                     room,
                     user,
                     message.getMessage(),
-                    "MESSAGE"
-            );
+                    "MESSAGE");
 
-            ChatEntity savedChat =
-        chatRepository.save(chatEntity);
+            ChatEntity savedChat = chatRepository.save(chatEntity);
 
-message.setsentAt(
-        savedChat.getSentAt().toString()
-);
+            message.setSentAt(
+                    savedChat.getSentAt().toString());
             System.out.println("Chat saved successfully.");
         }
 
         // Send message to all members subscribed to this room
         messagingTemplate.convertAndSend(
                 "/topic/chat/" + message.getRoomId(),
-                message
-        );
+                message);
     }
-    
+
 }

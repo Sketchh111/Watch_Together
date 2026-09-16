@@ -35,11 +35,11 @@ public class ChatMessage {
         this.message = message;
     }
 
-    public String getsentAt() {
+    public String getSentAt() {
         return sentAt;
     }
 
-    public void setsentAt(String sentAt) {
+    public void setSentAt(String sentAt) {
         this.sentAt = sentAt;
     }
 

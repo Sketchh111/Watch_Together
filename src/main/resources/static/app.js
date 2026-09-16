@@ -137,7 +137,23 @@ function connect() {
 
                 }
             );
+            stompClient.subscribe(
+                "/topic/video/" + roomId,
+                function (message) {
+                    handleVideoMessage(message);
+                }
+            );
 
+            // Chat subscription
+            stompClient.subscribe(
+                "/topic/chat/" + roomId,
+                function (message) {
+                    handleChatMessage(message);
+                }
+            );
+
+            // Load previous messages
+            loadChatHistory(roomId);
 
             console.log(
                 "Joined room:",
@@ -678,4 +694,108 @@ function formatTime(time) {
         hour: "2-digit",
         minute: "2-digit",
     });
+}
+
+async function loadChatHistory(roomId) {
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:8080/api/rooms/"
+            + roomId
+            + "/messages"
+        );
+
+        if (!response.ok) {
+            console.error("Failed to load chat history");
+            return;
+        }
+
+        const messages = await response.json();
+
+        const chatBox =
+            document.getElementById("chatBox");
+
+        const welcome =
+            chatBox.querySelector(".welcome-message");
+
+        if (welcome) {
+            welcome.remove();
+        }
+
+        messages.forEach(function (data) {
+            displayChatMessage(data);
+        });
+
+        chatBox.scrollTop =
+            chatBox.scrollHeight;
+
+    } catch (error) {
+
+        console.error(
+            "Chat history error:",
+            error
+        );
+    }
+}
+
+function displayChatMessage(data) {
+    console.log("CHAT DATA:", data);
+
+    const chatBox =
+        document.getElementById("chatBox");
+
+    const currentUser =
+        document
+            .getElementById("username")
+            .value
+            .trim();
+
+    const msgDiv =
+        document.createElement("div");
+
+    msgDiv.classList.add("message");
+
+    const senderName =
+        data.sender ||
+        (data.user && data.user.username) ||
+        data.username ||
+        "Unknown User";
+
+    if (senderName === currentUser) {
+        msgDiv.classList.add("right");
+    } else {
+        msgDiv.classList.add("left");
+    }
+
+    // Sender
+    const senderDiv =
+        document.createElement("div");
+
+    senderDiv.classList.add("sender-name");
+
+    senderDiv.textContent =
+        senderName;
+
+    // Message
+    const messageDiv =
+        document.createElement("div");
+
+    messageDiv.textContent =
+        data.message;
+
+    // Time
+    const timeDiv =
+        document.createElement("small");
+
+    timeDiv.classList.add("message-time");
+
+    timeDiv.textContent =
+        formatTime(data.sentAt);
+
+    msgDiv.appendChild(senderDiv);
+    msgDiv.appendChild(messageDiv);
+    msgDiv.appendChild(timeDiv);
+
+    chatBox.appendChild(msgDiv);
 }
