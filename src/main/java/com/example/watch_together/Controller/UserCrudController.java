@@ -4,6 +4,7 @@ import com.example.watch_together.Model.User;
 import com.example.watch_together.Repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,9 @@ public class UserCrudController {
         User savedUser =
                 userRepository.save(user);
 
-        return ResponseEntity.ok(savedUser);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(savedUser);
     }
 
 
@@ -42,6 +45,7 @@ public class UserCrudController {
 
         List<User> users =
                 userRepository.findAll();
+                
 
         return ResponseEntity.ok(users);
     }
