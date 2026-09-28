@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - Watch Together</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <header class="dashboard-header">
+
+            <div>
+                <h1>🎬 Watch Together</h1>
+                <p>Watch. Chat. Enjoy together.</p>
+            </div>
+
+            <button class="logout-button" onclick="logout()">
+                Logout
+            </button>
+
+        </header>
+
+
+        <section class="welcome-section">
+
+            <h2>
+                Welcome back,
+                <span id="username"></span> 👋
+            </h2>
+
+            <p>
+                Create a room or join your friends to start watching together.
+            </p>
+
+        </section>
+
+
+        <section class="room-actions">
+
+            <div class="room-card">
+
+                <div class="room-icon">
+                    ➕
+                </div>
+
+                <h3>Create a Room</h3>
+
+                <p>
+                    Create your own private room and invite your friends.
+                </p>
+
+                <button onclick="createRoom()">
+                    Create Room
+                </button>
+
+            </div>
+
+
+            <div class="room-card">
+
+                <div class="room-icon">
+                    🚪
+                </div>
+
+                <h3>Join a Room</h3>
+
+                <p>
+                    Join a friend's room using a room code and password.
+                </p>
+
+                <button onclick="joinRoom()">
+                    Join Room
+                </button>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <script>
+
+        const username = localStorage.getItem("username");
+
+        // If user is not logged in
+        if (!username) {
+
+            window.location.href = "index.html";
+
+        }
+
+        // Display username
+        document.getElementById("username").textContent = username;
+
+
+        function createRoom() {
+
+            alert("Create Room coming next!");
+
+        }
+
+
+        function joinRoom() {
+
+            alert("Join Room coming next!");
+
+        }
+
+
+        function logout() {
+
+            localStorage.removeItem("username");
+
+            window.location.href = "index.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

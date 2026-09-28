@@ -9,6 +9,7 @@ import com.example.watch_together.Model.User;
 import com.example.watch_together.Repository.RoomMemberRepository;
 import com.example.watch_together.Repository.RoomRepository;
 import com.example.watch_together.Repository.UserRepository;
+import com.example.watch_together.Model.CreateRoomRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,11 +29,12 @@ public class RoomController {
         private UserRepository userRepository;
 
         @PostMapping("/create")
-        public ResponseEntity<?> createRoom(@RequestParam String username) {
+        public ResponseEntity<?> createRoom(
+                        @RequestBody CreateRoomRequest request) {
 
-                // 1. Find user
+                // 1. Find creator
                 User user = userRepository
-                                .findByUsername(username)
+                                .findByUsername(request.getUsername())
                                 .orElse(null);
 
                 if (user == null) {
@@ -41,7 +43,16 @@ public class RoomController {
                                         .body("User not found");
                 }
 
-                // 2. Generate unique room code
+                // 2. Validate password
+                if (request.getRoomPassword() == null
+                                || request.getRoomPassword().trim().isEmpty()) {
+
+                        return ResponseEntity
+                                        .badRequest()
+                                        .body("Room password is required");
+                }
+
+                // 3. Generate unique room code
                 String roomCode;
 
                 do {
@@ -52,22 +63,28 @@ public class RoomController {
 
                 } while (roomRepository.existsByRoomCode(roomCode));
 
-                // 3. Generate room password
-                String roomPassword = UUID.randomUUID()
-                                .toString()
-                                .substring(0, 6)
-                                .toUpperCase();
+                // 4. Get room name
+                String roomName = request.getRoomName();
 
-                // 4. Create Room
+                if (roomName == null
+                                || roomName.trim().isEmpty()) {
+
+                        roomName = roomCode;
+                }
+
+                // 5. Create Room
                 Room room = new Room(
                                 roomCode,
-                                roomPassword,
+                                request.getRoomPassword(),
                                 user);
 
-                // 5. Save Room
+                // 6. Set room name
+                room.setRoomName(roomName);
+
+                // 7. Save room
                 Room savedRoom = roomRepository.save(room);
 
-                // 6. Return response
+                // 8. Return created room
                 return ResponseEntity.ok(savedRoom);
         }
 
@@ -128,7 +145,14 @@ public class RoomController {
                         return ResponseEntity.ok("Successfully rejoined room");
                 }
 
-                roomMemberRepository.save(member);
+                RoomMember newMember = new RoomMember();
+
+                newMember.setRoom(room);
+                newMember.setUser(user);
+                newMember.setJoinedAt(LocalDateTime.now());
+                newMember.setLeftAt(null);
+
+                roomMemberRepository.save(newMember);
 
                 return ResponseEntity.ok("Successfully joined room");
 
@@ -205,5 +229,13 @@ public class RoomController {
                 roomMemberRepository.save(member);
 
                 return ResponseEntity.ok("Successfully left room");
+        }
+
+        @GetMapping
+        public ResponseEntity<List<Room>> getAllRooms() {
+
+                List<Room> rooms = roomRepository.findAll();
+
+                return ResponseEntity.ok(rooms);
         }
 }

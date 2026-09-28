@@ -799,3 +799,256 @@ function displayChatMessage(data) {
 
     chatBox.appendChild(msgDiv);
 }
+// ==================================================
+// REGISTER USER
+// ==================================================
+
+async function registerUser() {
+
+    const username =
+        document.getElementById("registerUsername")
+            .value
+            .trim();
+
+    const email =
+        document.getElementById("registerEmail")
+            .value
+            .trim();
+
+    const password =
+        document.getElementById("registerPassword")
+            .value;
+
+    const confirmPassword =
+        document.getElementById("confirmPassword")
+            .value;
+
+
+    // ==============================
+    // VALIDATION
+    // ==============================
+
+    if (!username) {
+        alert("Please enter username!");
+        return;
+    }
+
+    if (!email) {
+        alert("Please enter email!");
+        return;
+    }
+
+    if (!password) {
+        alert("Please enter password!");
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+    }
+
+
+    // ==============================
+    // SEND REQUEST
+    // ==============================
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:8080/api/users/register",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    username: username,
+                    email: email,
+                    password: password
+                })
+            }
+        );
+
+
+        const result = await response.text();
+
+        console.log("REGISTER RESPONSE:", result);
+
+
+        if (!response.ok) {
+
+            alert(
+                result || "Registration failed!"
+            );
+
+            return;
+        }
+
+
+        alert("Account created successfully!");
+
+
+        // Go back to login
+        showLogin();
+
+
+        // Clear fields
+        document.getElementById(
+            "registerUsername"
+        ).value = "";
+
+        document.getElementById(
+            "registerEmail"
+        ).value = "";
+
+        document.getElementById(
+            "registerPassword"
+        ).value = "";
+
+        document.getElementById(
+            "confirmPassword"
+        ).value = "";
+
+    } catch (error) {
+
+        console.error(
+            "Registration error:",
+            error
+        );
+
+        alert(
+            "Could not connect to server."
+        );
+    }
+}
+
+
+// ==================================================
+// LOGIN USER
+// ==================================================
+
+async function loginUser() {
+
+    const username =
+        document.getElementById("loginUsername")
+            .value
+            .trim();
+
+    const password =
+        document.getElementById("loginPassword")
+            .value;
+
+
+    // ==============================
+    // VALIDATION
+    // ==============================
+
+    if (!username) {
+
+        alert("Please enter username!");
+
+        return;
+    }
+
+    if (!password) {
+
+        alert("Please enter password!");
+
+        return;
+    }
+
+
+    // ==============================
+    // SEND REQUEST
+    // ==============================
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:8080/api/users/login",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            }
+        );
+
+
+        const result =
+            await response.text();
+
+        console.log(
+            "LOGIN RESPONSE:",
+            result
+        );
+
+
+        if (!response.ok) {
+
+            alert(
+                result || "Invalid username or password!"
+            );
+
+            return;
+        }
+
+
+       alert("Login successful!");
+
+localStorage.setItem("username", username);
+
+window.location.href = "dashboard.html";
+
+
+    
+    } catch (error) {
+
+        console.error(
+            "Login error:",
+            error
+        );
+
+        alert(
+            "Could not connect to server."
+        );
+    }
+}// ==================================================
+// SHOW REGISTER
+// ==================================================
+
+function showRegister() {
+
+    document
+        .getElementById("loginCard")
+        .classList.add("hidden");
+
+    document
+        .getElementById("registerCard")
+        .classList.remove("hidden");
+}
+
+
+// ==================================================
+// SHOW LOGIN
+// ==================================================
+
+function showLogin() {
+
+    document
+        .getElementById("registerCard")
+        .classList.add("hidden");
+
+    document
+        .getElementById("loginCard")
+        .classList.remove("hidden");
+}

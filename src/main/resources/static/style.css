@@ -4,473 +4,293 @@
     padding: 0;
 }
 
-
 body {
-
     font-family: Arial, Helvetica, sans-serif;
-
-    background: #121212;
-
+    background:
+        radial-gradient(circle at top left, #162a45 0%, transparent 35%),
+        radial-gradient(circle at bottom right, #10243b 0%, transparent 35%),
+        #0b0f14;
     color: white;
-
     min-height: 100vh;
-
 }
 
 
 /* ========================= */
-/* MAIN CONTAINER */
+/* AUTH CONTAINER */
 /* ========================= */
 
-.container {
-
-    width: 95%;
-
-    max-width: 1200px;
-
-    margin: auto;
-
-    padding: 30px 0;
-
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
 }
 
 
 /* ========================= */
-/* HEADER */
+/* LOGO */
 /* ========================= */
 
-header {
-
+.auth-logo {
     text-align: center;
-
-    margin-bottom: 30px;
-
-}
-
-
-header h1 {
-
-    font-size: 36px;
-
-    margin-bottom: 10px;
-
-}
-
-
-header p {
-
-    color: #aaa;
-
-    font-size: 16px;
-
-}
-
-
-/* ========================= */
-/* ROOM SECTION */
-/* ========================= */
-
-.room-section {
-
-    background: #1e1e1e;
-
-    padding: 20px;
-
-    border-radius: 12px;
-
     margin-bottom: 25px;
+}
+
+.logo-icon {
+    width: 65px;
+    height: 65px;
 
     display: flex;
+    align-items: center;
+    justify-content: center;
 
-    align-items: end;
+    margin: 0 auto 12px;
 
-    gap: 15px;
+    background: linear-gradient(
+        135deg,
+        #0084ff,
+        #6c5ce7
+    );
 
-    flex-wrap: wrap;
+    border-radius: 18px;
 
+    font-size: 30px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 132, 255, 0.25);
+}
+
+.auth-logo h1 {
+    font-size: 30px;
+    margin-bottom: 7px;
+}
+
+.auth-logo p {
+    color: #8b949e;
+    font-size: 14px;
 }
 
 
-.input-group {
+/* ========================= */
+/* AUTH CARD */
+/* ========================= */
 
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+
+    background: rgba(22, 27, 34, 0.92);
+
+    border: 1px solid #30363d;
+
+    border-radius: 18px;
+
+    padding: 32px;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.45);
+
+    backdrop-filter: blur(10px);
+}
+
+
+/* ========================= */
+/* AUTH TITLE */
+/* ========================= */
+
+.auth-card h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.auth-subtitle {
+    color: #8b949e;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+
+/* ========================= */
+/* INPUTS */
+/* ========================= */
+
+.auth-input-group {
     display: flex;
-
     flex-direction: column;
 
-    gap: 7px;
-
+    margin-bottom: 18px;
 }
 
+.auth-input-group label {
+    font-size: 13px;
+    font-weight: bold;
 
-.input-group label {
+    color: #c9d1d9;
 
-    font-size: 14px;
-
-    color: #bbb;
-
+    margin-bottom: 8px;
 }
 
+.auth-input-group input {
+    width: 100%;
 
-.input-group input {
+    padding: 13px 14px;
 
-    width: 220px;
-
-    padding: 11px;
-
-    border-radius: 7px;
-
-    border: 1px solid #444;
-
-    background: #2a2a2a;
+    background: #0d1117;
 
     color: white;
+
+    border: 1px solid #30363d;
+
+    border-radius: 9px;
 
     outline: none;
 
+    font-size: 14px;
+
+    transition: 0.2s;
 }
 
+.auth-input-group input::placeholder {
+    color: #6e7681;
+}
 
-.input-group input:focus {
-
+.auth-input-group input:focus {
     border-color: #0084ff;
 
+    box-shadow:
+        0 0 0 3px rgba(0, 132, 255, 0.12);
 }
 
 
 /* ========================= */
-/* BUTTONS */
+/* AUTH BUTTON */
 /* ========================= */
 
-button {
+.auth-button {
+    width: 100%;
+
+    padding: 13px;
+
+    margin-top: 5px;
 
     border: none;
 
-    cursor: pointer;
+    border-radius: 9px;
 
-    border-radius: 7px;
+    background: linear-gradient(
+        135deg,
+        #0084ff,
+        #006fd6
+    );
+
+    color: white;
 
     font-size: 14px;
 
     font-weight: bold;
 
+    cursor: pointer;
+
+    transition: 0.2s;
 }
 
+.auth-button:hover {
+    transform: translateY(-1px);
 
-.primary-button {
-
-    background: #0084ff;
-
-    color: white;
-
-    padding: 12px 20px;
-
+    box-shadow:
+        0 8px 20px rgba(0, 132, 255, 0.25);
 }
 
-
-.primary-button:hover {
-
-    background: #006fd6;
-
-}
-
-
-.control-button {
-
-    background: #292929;
-
-    color: white;
-
-    padding: 10px 18px;
-
-}
-
-
-.control-button:hover {
-
-    background: #3a3a3a;
-
-}
-
-
-.send-button {
-
-    background: #0084ff;
-
-    color: white;
-
-    padding: 11px 18px;
-
-}
-
-
-.send-button:hover {
-
-    background: #006fd6;
-
+.auth-button:active {
+    transform: translateY(0);
 }
 
 
 /* ========================= */
-/* CONNECTION STATUS */
+/* DIVIDER */
 /* ========================= */
 
-.status {
-
-    padding: 10px 15px;
-
-    border-radius: 20px;
-
-    font-size: 13px;
-
-}
-
-
-.connected {
-
-    background: #123d20;
-
-    color: #4ade80;
-
-}
-
-
-.disconnected {
-
-    background: #3d1515;
-
-    color: #f87171;
-
-}
-
-
-/* ========================= */
-/* MAIN GRID */
-/* ========================= */
-
-main {
-
-    display: grid;
-
-    grid-template-columns: 2fr 1fr;
-
-    gap: 25px;
-
-}
-
-
-/* ========================= */
-/* SECTIONS */
-/* ========================= */
-
-.video-section,
-.chat-section {
-
-    background: #1e1e1e;
-
-    padding: 20px;
-
-    border-radius: 12px;
-
-}
-
-
-.video-section h2,
-.chat-section h2 {
-
-    margin-bottom: 15px;
-
-}
-
-
-/* ========================= */
-/* VIDEO */
-/* ========================= */
-
-.video-container {
-
-    width: 100%;
-
-    background: black;
-
-    border-radius: 10px;
-
-    overflow: hidden;
-
-}
-
-
-video {
-
-    width: 100%;
-
-    display: block;
-
-    background: black;
-
-}
-
-
-.video-controls {
-
+.auth-divider {
     display: flex;
 
-    gap: 10px;
+    align-items: center;
 
-    margin-top: 15px;
+    gap: 12px;
 
+    margin: 25px 0;
+
+    color: #484f58;
+
+    font-size: 11px;
 }
 
-
-.sync-info {
-
-    color: #888;
-
-    font-size: 13px;
-
-    margin-top: 15px;
-
-}
-
-
-/* ========================= */
-/* CHAT */
-/* ========================= */
-
-.chat-box {
-
-    height: 450px;
-
-    overflow-y: auto;
-
-    border: 1px solid #333;
-
-    border-radius: 8px;
-
-    padding: 10px;
-
-    background: #151515;
-
-    display: flex;
-
-    flex-direction: column;
-
-}
-
-
-.message {
-
-    max-width: 75%;
-
-    padding: 9px 12px;
-
-    margin: 5px;
-
-    border-radius: 10px;
-
-    word-wrap: break-word;
-
-}
-
-
-.message strong {
-
-    display: block;
-
-    margin-bottom: 4px;
-
-}
-
-
-.message small {
-
-    display: block;
-
-    margin-top: 5px;
-
-    opacity: 0.7;
-
-    font-size: 10px;
-
-}
-
-
-/* OTHER USER */
-
-.left {
-
-    background: #303030;
-
-    align-self: flex-start;
-
-}
-
-
-/* CURRENT USER */
-
-.right {
-
-    background: #0084ff;
-
-    align-self: flex-end;
-
-}
-
-
-/* ========================= */
-/* WELCOME MESSAGE */
-/* ========================= */
-
-.welcome-message {
-
-    color: #777;
-
-    text-align: center;
-
-    margin-top: 20px;
-
-    font-size: 13px;
-
-}
-
-
-/* ========================= */
-/* CHAT INPUT */
-/* ========================= */
-
-.chat-input-area {
-
-    display: flex;
-
-    gap: 8px;
-
-    margin-top: 10px;
-
-}
-
-
-.chat-input-area input {
+.auth-divider::before,
+.auth-divider::after {
+    content: "";
 
     flex: 1;
 
-    padding: 11px;
+    height: 1px;
 
-    border-radius: 7px;
-
-    border: 1px solid #444;
-
-    background: #292929;
-
-    color: white;
-
-    outline: none;
-
+    background: #30363d;
 }
 
 
-.chat-input-area input:focus {
+/* ========================= */
+/* SWITCH LOGIN / REGISTER */
+/* ========================= */
 
-    border-color: #0084ff;
+.switch-auth {
+    text-align: center;
 
+    color: #8b949e;
+
+    font-size: 13px;
+}
+
+.switch-auth button {
+    border: none;
+
+    background: none;
+
+    color: #0084ff;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.switch-auth button:hover {
+    text-decoration: underline;
+}
+
+
+/* ========================= */
+/* HIDDEN */
+/* ========================= */
+
+.hidden {
+    display: none;
+}
+
+
+/* ========================= */
+/* FOOTER */
+/* ========================= */
+
+.auth-footer {
+    color: #484f58;
+
+    font-size: 12px;
+
+    margin-top: 25px;
+
+    text-align: center;
 }
 
 
@@ -478,54 +298,24 @@ video {
 /* MOBILE */
 /* ========================= */
 
-@media (max-width: 800px) {
+@media (max-width: 500px) {
 
-    main {
-
-        grid-template-columns: 1fr;
-
+    .auth-container {
+        padding: 20px 15px;
     }
 
-
-    .room-section {
-
-        align-items: stretch;
-
-        flex-direction: column;
-
+    .auth-card {
+        padding: 25px 20px;
+        border-radius: 15px;
     }
 
-
-    .input-group input {
-
-        width: 100%;
-
+    .auth-logo h1 {
+        font-size: 26px;
     }
 
-
-    .primary-button {
-
-        width: 100%;
-
+    .logo-icon {
+        width: 58px;
+        height: 58px;
+        font-size: 27px;
     }
-
-
-    .chat-box {
-
-        height: 300px;
-
-    }
-
-}.message {
-    max-width: 75%;
-    padding: 9px 12px;
-    margin: 5px;
-    border-radius: 10px;
-    word-wrap: break-word;
-}
-
-.sender-name {
-    font-weight: bold;
-    font-size: 13px;
-    margin-bottom: 4px;
 }

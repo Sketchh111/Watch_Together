@@ -37,4 +37,26 @@ public class UserController {
 
         return ResponseEntity.ok(savedUser);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User loginUser) {
+
+        User user = userRepository
+                .findByUsername(loginUser.getUsername())
+                .orElse(null);
+
+        if (user == null) {
+            return ResponseEntity
+                    .badRequest()
+                    .body("Invalid username or password");
+        }
+
+        if (!user.getPassword().equals(loginUser.getPassword())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body("Invalid username or password");
+        }
+
+        return ResponseEntity.ok(user);
+    }
 }
