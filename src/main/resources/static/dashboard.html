@@ -3,128 +3,78 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Dashboard - Watch Together</title>
-
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Dashboard — Watch Together</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-
-    <div class="dashboard-container">
-
-        <header class="dashboard-header">
-
-            <div>
-                <h1>🎬 Watch Together</h1>
-                <p>Watch. Chat. Enjoy together.</p>
+<body class="dashboard-page">
+    <div class="ambient a1"></div>
+    <div class="ambient a2"></div>
+    <div class="app-shell">
+        <header class="topbar"><a class="brand" href="dashboard.html"><span class="brand-icon small">▶</span><span>Watch
+                    Together</span></a>
+            <div class="top-actions">
+                <div class="user-chip"><span class="online-dot"></span><span id="username"></span></div><button
+                    class="ghost-btn" onclick="logout()">Logout</button>
             </div>
-
-            <button class="logout-button" onclick="logout()">
-                Logout
-            </button>
-
         </header>
-
-
-        <section class="welcome-section">
-
-            <h2>
-                Welcome back,
-                <span id="username"></span> 👋
-            </h2>
-
-            <p>
-                Create a room or join your friends to start watching together.
-            </p>
-
-        </section>
-
-
-        <section class="room-actions">
-
-            <div class="room-card">
-
-                <div class="room-icon">
-                    ➕
+        <main class="dashboard-content">
+            <section class="dashboard-hero">
+                <div><span class="eyebrow">YOUR WATCH SPACE</span>
+                    <h1>Ready for movie night,<br><span id="welcomeUsername"></span>?</h1>
+                    <p>Create a private room or join your friends with a room code.</p>
                 </div>
-
-                <h3>Create a Room</h3>
-
-                <p>
-                    Create your own private room and invite your friends.
-                </p>
-
-                <button onclick="createRoom()">
-                    Create Room
-                </button>
-
-            </div>
-
-
-            <div class="room-card">
-
-                <div class="room-icon">
-                    🚪
+                <div class="status-card"><span class="online-dot"></span>
+                    <div><b>Everything is synced</b><small>Video and chat work in real time</small></div>
                 </div>
-
-                <h3>Join a Room</h3>
-
-                <p>
-                    Join a friend's room using a room code and password.
-                </p>
-
-                <button onclick="joinRoom()">
-                    Join Room
-                </button>
-
-            </div>
-
-        </section>
-
+            </section>
+            <section class="action-grid">
+                <article class="action-card featured">
+                    <div class="card-top"><span class="action-icon">+</span><span>HOST</span></div>
+                    <h2>Create a room</h2>
+                    <p>Start a private watch party, give it a name and protect it with a password.</p><button
+                        class="primary-btn" onclick="showCreateRoom()">Create room <span>→</span></button>
+                </article>
+                <article class="action-card">
+                    <div class="card-top"><span class="action-icon">↗</span><span>JOIN</span></div>
+                    <h2>Join a room</h2>
+                    <p>Enter your friend's six-character room code and password to join instantly.</p><button
+                        class="secondary-btn" onclick="showJoinRoom()">Join room <span>→</span></button>
+                </article>
+            </section>
+            <section class="feature-strip">
+                <div><small>01</small><b>Perfect sync</b><span>Play, pause and seek together.</span></div>
+                <div><small>02</small><b>Private rooms</b><span>Share a code and password.</span></div>
+                <div><small>03</small><b>Live conversation</b><span>Chat while you watch.</span></div>
+            </section>
+        </main>
     </div>
-
-
-    <script>
-
-        const username = localStorage.getItem("username");
-
-        // If user is not logged in
-        if (!username) {
-
-            window.location.href = "index.html";
-
-        }
-
-        // Display username
-        document.getElementById("username").textContent = username;
-
-
-        function createRoom() {
-
-            alert("Create Room coming next!");
-
-        }
-
-
-        function joinRoom() {
-
-            alert("Join Room coming next!");
-
-        }
-
-
-        function logout() {
-
-            localStorage.removeItem("username");
-
-            window.location.href = "index.html";
-
-        }
-
-    </script>
-
+    <div id="createRoomModal" class="modal hidden">
+        <div class="modal-backdrop" onclick="closeCreateRoom()"></div>
+        <div class="modal-card"><button class="modal-close" onclick="closeCreateRoom()">×</button><span
+                class="eyebrow">NEW WATCH ROOM</span>
+            <h2>Create your room</h2>
+            <p>Give your watch party a name and a private password.</p><label>Room name<input id="roomName" type="text"
+                    placeholder="Friday Movie Night"></label><label>Room password<input id="roomPassword"
+                    type="password" placeholder="Create a password"></label><button class="primary-btn full"
+                onclick="createRoom()">Create room <span>→</span></button>
+            <p id="createRoomMessage" class="form-message"></p>
+        </div>
+    </div>
+    <div id="joinRoomModal" class="modal hidden">
+        <div class="modal-backdrop" onclick="closeJoinRoom()"></div>
+        <div class="modal-card"><button class="modal-close" onclick="closeJoinRoom()">×</button><span
+                class="eyebrow">JOIN WATCH ROOM</span>
+            <h2>Enter the room</h2>
+            <p>Use the room code and password shared by your host.</p><label>Room code<input id="joinRoomCode"
+                    type="text" maxlength="6" placeholder="ABC123" style="text-transform:uppercase"></label><label>Room
+                password<input id="joinRoomPassword" type="password" placeholder="Enter room password"></label><button
+                class="primary-btn full" onclick="joinRoom()">Join room <span>→</span></button>
+            <p id="joinRoomMessage" class="form-message"></p>
+        </div>
+    </div>
+    <script src="app.js"></script>
 </body>
 
 </html>

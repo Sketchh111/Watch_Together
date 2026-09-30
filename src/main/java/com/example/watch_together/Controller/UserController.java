@@ -3,6 +3,8 @@ package com.example.watch_together.Controller;
 import com.example.watch_together.Model.User;
 import com.example.watch_together.Repository.UserRepository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -59,4 +61,11 @@ public class UserController {
 
         return ResponseEntity.ok(user);
     }
+     @GetMapping
+        public ResponseEntity<List<User>> getAllUsers() {
+
+                List<User> users = userRepository.findAll();
+
+                return ResponseEntity.ok(users);
+        }
 }

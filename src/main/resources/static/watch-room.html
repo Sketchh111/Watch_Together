@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Watch Room — Watch Together</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="watch-page">
+    <div class="watch-shell">
+        <header class="watch-topbar"><a class="brand" href="dashboard.html"><span
+                    class="brand-icon small">▶</span><span>Watch Together</span></a>
+            <div class="room-meta">
+                <div class="room-code"><small>ROOM</small><b id="roomCode"></b></div>
+                <div class="watching"><span class="online-dot"></span><span id="watchingCount">LIVE</span></div>
+                <div class="avatar" id="userAvatar">U</div><span class="room-username" id="username"></span><button
+                    class="leave-btn" onclick="leaveRoom()">Leave</button>
+            </div>
+        </header>
+        <main class="watch-layout">
+            <section class="player-panel">
+                <div class="player-heading">
+                    <div><span class="eyebrow">WATCH ROOM</span>
+                        <h1 id="roomTitle">Movie night is live.</h1>
+                    </div><span class="sync-badge"><span class="online-dot"></span> Synced</span>
+                </div>
+                <div class="video-frame"><video id="video" controls preload="metadata">
+                        <source src="sample.mp4" type="video/mp4">Your browser does not support HTML5 video.
+                    </video></div>
+                <div class="player-footer">
+                    <div><span class="pulse-dot"></span><b>Live synchronization</b><small>Everyone sees the same
+                            moment.</small></div><span>Play / pause / seek is shared automatically</span>
+                </div>
+            </section>
+            <aside class="chat-panel">
+                <div class="chat-top">
+                    <div><span class="eyebrow">LIVE CONVERSATION</span>
+                        <h2>Room chat</h2>
+                    </div><span class="live-label">● LIVE</span>
+                </div>
+                <div id="chatBox" class="chat-box">
+                    <div class="welcome-message">
+                        <div class="welcome-icon">✦</div><b>Welcome to the room</b><span>Say hello while the movie
+                            starts.</span>
+                    </div>
+                </div>
+                <div id="typingIndicator" class="typing-indicator"></div>
+                <div class="chat-input-area"><input id="chatInput" type="text" placeholder="Write a message…"
+                        autocomplete="off"><button onclick="sendMessage()" aria-label="Send">↑</button></div>
+            </aside>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs/lib/stomp.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
